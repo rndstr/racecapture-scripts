@@ -1,4 +1,4 @@
-TICKS = 100
+TICKS = 5
 setTickRate(TICKS)
 
 function onTick()
