@@ -15,7 +15,7 @@ vs = {}
 tick_count = 0
 
 -- local min/max calculation.
-function calc_minmax()
+function vminmax_simple()
   print(table.concat(vs, ','))
   -- should not happen.
   if #vs < WINDOW_SIZE_SEC*FREQUENCY then
@@ -44,7 +44,7 @@ function calc_minmax()
   return 0, nil
 end
   
-function vminmax()
+function run_vminmax_simple()
   local id,ext, data = rxCAN(0, 10)
   tick_count = tick_count + 1
   if id == 417 then
@@ -56,7 +56,7 @@ function vminmax()
       table.insert(vs, data)
       if #vs > WINDOW_SIZE_SEC*FREQUENCY then table.remove(vs, 1) end
       if #vs == WINDOW_SIZE_SEC*FREQUENCY then
-        id, value = calc_minmax()
+        id, value = vminmax_simple()
         if id ~= 0 then
           setChannel(id, value)
         end
