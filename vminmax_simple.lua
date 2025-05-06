@@ -1,17 +1,13 @@
--- a very simple local vmin/vmax calculation.
-
-TICKS = 100
-
 -- name, Hz, precision, min, max, units
 minId = addChannel('VMin', 5, 0, 0, 350, 'mph')
 maxId = addChannel('VMax', 5, 0, 0, 350, 'mph')
 
 -- window size in seconds
-WINDOW_SIZE_SEC = 3
+WINDOW_SIZE_SEC = 5
 -- how many per seconds to record
 FREQUENCY = 5
 -- minimum difference between edges and mid value to be considered a local value.
-MIN_DELTA_MPH = 5
+MIN_DELTA_MPH = 10
 
 -- recorded values
 vs = {}
@@ -30,7 +26,7 @@ function calc_minmax()
   first, mid, last = vs[1], vs[math.ceil(#t/2)], vs[#t]
   print('  first='..first..', mid='..mid..', last='..last)
   -- too flat?
-  if math.abs(mid-first) < MIN_DELTA or math.abs(mid-last) < MIN_DELTA then
+  if math.abs(mid-first) < MIN_DELTA_MPH or math.abs(mid-last) < MIN_DELTA_MPH then
     print('  too similar.')
     return 0, nil
   end
@@ -50,7 +46,7 @@ end
   
 function vminmax()
   local id,ext, data = rxCAN(0, 10)
-  tick_count = tick_count +1
+  tick_count = tick_count + 1
   if id == 417 then
     -- skip if it's not yet time to record.
     if tick_count >= TICKS/FREQUENCY then
