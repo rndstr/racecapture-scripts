@@ -31,12 +31,12 @@ function vminmax_simple()
     return 0, nil
   end
   -- maxima?
-  if first < mid && last < mid then
+  if first < mid and last < mid then
     print('  new max='..mid)
     return maxId, mid
   end
   -- minima?
-  if first > mid && last > mid then
+  if first > mid and last > mid then
     print('  new min='..mid)
     return minId, mid
   end
@@ -60,6 +60,7 @@ function run_vminmax_simple()
         if id ~= 0 then
           setChannel(id, value)
         end
+      end
     end
   end
 end
