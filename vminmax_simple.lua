@@ -44,7 +44,7 @@ function vminmax_simple()
   return 0, nil
 end
   
-function run_vminmax_simple()
+function onTick_vminmax_simple()
   local id,ext, data = rxCAN(0, 10)
   tick_count = tick_count + 1
   if id == 417 then
