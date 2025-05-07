@@ -16,31 +16,31 @@ tick_count = 0
 
 -- local min/max calculation.
 function vminmax_simple()
-  print(table.concat(vs, ','))
+  print('\n'..table.concat(vs, ','))
   -- should not happen.
   if #vs < WINDOW_SIZE_SEC*FREQUENCY then
     print('  not enough.')
     return 0, nil
   end
   
-  first, mid, last = vs[1], vs[math.ceil(#t/2)], vs[#t]
-  print('  first='..first..', mid='..mid..', last='..last)
+  first, mid, last = vs[1], vs[math.ceil(#vs/2)], vs[#vs]
+  print('\n  first='..first..', mid='..mid..', last='..last)
   -- too flat?
   if math.abs(mid-first) < MIN_DELTA_MPH or math.abs(mid-last) < MIN_DELTA_MPH then
-    print('  too similar.')
+    print('\n  too similar.')
     return 0, nil
   end
   -- maxima?
   if first < mid and last < mid then
-    print('  new max='..mid)
+    print('\n  new max='..mid)
     return maxId, mid
   end
   -- minima?
   if first > mid and last > mid then
-    print('  new min='..mid)
+    print('\n  new min='..mid)
     return minId, mid
   end
-  print('  no hill.')
+  print('\n  no hill.')
   return 0, nil
 end
   
