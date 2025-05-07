@@ -45,21 +45,18 @@ function vminmax_simple()
 end
   
 function tick_vminmax_simple()
-  local id,ext, data = rxCAN(0, 10)
+  local speed = getChannel('Speed')
   tick_count = tick_count + 1
-  if id == 417 then
-    -- skip if it's not yet time to record.
-    if tick_count >= TICKS/FREQUENCY then
-      tick_count = 0
-      -- append, resize, update.
-      
-      table.insert(vs, data)
-      if #vs > WINDOW_SIZE_SEC*FREQUENCY then table.remove(vs, 1) end
-      if #vs == WINDOW_SIZE_SEC*FREQUENCY then
-        id, value = vminmax_simple()
-        if id ~= 0 then
-          setChannel(id, value)
-        end
+  -- skip if it's not yet time to record.
+  if tick_count >= TICKS/FREQUENCY then
+    tick_count = 0
+    -- append, resize, update.
+    table.insert(vs, speed)
+    if #vs > WINDOW_SIZE_SEC*FREQUENCY then table.remove(vs, 1) end
+    if #vs == WINDOW_SIZE_SEC*FREQUENCY then
+      id, value = vminmax_simple()
+      if id ~= 0 then
+        setChannel(id, value)
       end
     end
   end
