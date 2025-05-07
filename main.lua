@@ -1,7 +1,8 @@
-TICKS = 5
+TICKS = 50
 setTickRate(TICKS)
 
 function onTick()
-  -- tick_vminmax_simple()
   -- tick_mock()
+  -- tick_vminmax_simple()
+  -- tick_brakebias()
 end
