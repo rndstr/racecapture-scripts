@@ -2,5 +2,6 @@ TICKS = 5
 setTickRate(TICKS)
 
 function onTick()
-  run_vminmax_simple()
+  -- tick_vminmax_simple()
+  -- tick_mock()
 end
