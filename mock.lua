@@ -1,13 +1,8 @@
-ctid = addChannel("CoolantTemp", 10, 0)
-otid = addChannel("OilTemp", 10, 0)
-tid = addChannel("TPS", 10, 0)
-bid = addChannel("Brake", 10, 0)
-
 mocks = {
-  {id=ctid, from=100, to=280, step=1},
-  {id=otid, from=100, to=280, step=-1},
-  {id=tid, from=0, to=100, step=1},
-  {id=bid, from=0, to=100, step=2},
+  {id=addChannel("CoolantTemp", 10, 0), from=100, to=280, step=1},
+  {id=addChannel("OilTemp", 10, 0), from=100, to=280, step=-1},
+  {id=addChannel("TPS", 10, 0), from=0, to=100, step=1},
+  {id=addChannel("Brake", 10, 0), from=0, to=100, step=2},
 }
 
 function tick_mock()
