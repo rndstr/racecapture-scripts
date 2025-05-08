@@ -1,13 +1,13 @@
--- name, Hz, precision, min, max, units
-minId = addChannel('VMin', 5, 0, 0, 350, 'mph')
-maxId = addChannel('VMax', 5, 0, 0, 350, 'mph')
-
 -- window size in seconds
 WINDOW_SIZE_SEC = 5
 -- how many per seconds to record
 FREQUENCY = 5
 -- minimum difference between edges and mid value to be considered a local value.
 MIN_DELTA_MPH = 10
+
+-- name, Hz, precision, min, max, units
+minId = addChannel('VMin', FREQUENCY, 0, 0, 200, 'mph')
+maxId = addChannel('VMax', FREQUENCY, 0, 0, 200, 'mph')
 
 -- recorded values
 vs = {}
