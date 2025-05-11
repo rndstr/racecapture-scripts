@@ -1,3 +1,4 @@
+--------------------------------------------
 -- vminmax_simple: simple window based VMin and VMax signal.
 
 -- window size in seconds to keep track of first and last value.

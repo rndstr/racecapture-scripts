@@ -1,3 +1,4 @@
+--------------------------------------------
 -- mock: Mocks signals to test dashboards while no data is being
 -- provided to the racecapture device.
 

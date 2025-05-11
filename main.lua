@@ -1,3 +1,4 @@
+--------------------------------------------
 -- main: Main tick function for racecapture device.
 --
 -- Uncomment calls in onTick() to run scripts.

@@ -1,5 +1,6 @@
+--------------------------------------------
 -- frequency: A script to help run actions less frequently than
--- the global TICK frequncy.
+-- the global TICK frequency.
 
 -- current tick
 local tick = 0
