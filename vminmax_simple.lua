@@ -1,30 +1,25 @@
 -- vminmax_simple: simple window based VMin and VMax signal.
 
--- window size in seconds
-WINDOW_SIZE_SEC = 5
+-- window size in seconds to keep track of first and last value.
+local WINDOW_SIZE_SEC = 5
 -- how many per seconds to record
-FREQUENCY = 5
+local FREQUENCY = 10
 -- minimum difference between edges and mid value to be considered a local value.
-MIN_DELTA_MPH = 10
+local MIN_DELTA_MPH = 10
 
 -- name, Hz, precision, min, max, units
-minId = addChannel('VMin', FREQUENCY, 0, 0, 200, 'mph')
-maxId = addChannel('VMax', FREQUENCY, 0, 0, 200, 'mph')
+local minId = addChannel('VMin', 2, 0, 0, 200, 'mph')
+local maxId = addChannel('VMax', 2, 0, 0, 200, 'mph')
 
 -- recorded values
-vs = {}
+local vs = {}
 -- we record a value every TICKS/FREQUENCY counts.
-tick_count = 0
+local tick_count = 0
 
 -- local min/max calculation.
-function vminmax_simple()
+-- Returns signalId and value to update it to.
+function __vminmax_signal()
   dbg('\n'..table.concat(vs, ','))
-  -- should not happen.
-  if #vs < WINDOW_SIZE_SEC*FREQUENCY then
-    dbg('  not enough.')
-    return 0, nil
-  end
-  
   first, mid, last = vs[1], vs[math.ceil(#vs/2)], vs[#vs]
   dbg('\n  first='..first..', mid='..mid..', last='..last)
   -- too flat?
@@ -45,23 +40,19 @@ function vminmax_simple()
   dbg('\n  no hill.')
   return 0, nil
 end
-  
+
 function tick_vminmax_simple()
   local speed = getChannel('Speed')
-  tick_count = tick_count + 1
-  -- skip if it's not yet time to record.
-  if tick_count >= TICKS/FREQUENCY then
-    tick_count = 0
+  if should_run(FREQUENCY) then
     -- append, resize, update.
     table.insert(vs, speed)
     if #vs > WINDOW_SIZE_SEC*FREQUENCY then table.remove(vs, 1) end
     if #vs == WINDOW_SIZE_SEC*FREQUENCY then
-      id, value = vminmax_simple()
+      local id, value = vminmax_simple()
       if id ~= 0 then
         setChannel(id, value)
       end
     end
   end
 end
-  
-  
+
