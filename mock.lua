@@ -1,3 +1,6 @@
+-- mock: Mocks signals to test dashboards while no data is being
+-- provided to the racecapture device.
+
 mocks = {
   {id=addChannel("CoolantTemp", 10, 0), from=100, to=280, step=1},
   {id=addChannel("OilTemp", 10, 0), from=100, to=280, step=-1},

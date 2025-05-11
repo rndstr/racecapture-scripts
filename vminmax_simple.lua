@@ -1,3 +1,5 @@
+-- vminmax_simple: simple window based VMin and VMax signal.
+
 -- window size in seconds
 WINDOW_SIZE_SEC = 5
 -- how many per seconds to record
