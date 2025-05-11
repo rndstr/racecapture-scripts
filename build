@@ -1,0 +1,64 @@
+#!/bin/bash
+
+# Define the text files and their corresponding flags
+# Add your file paths and desired flags here.
+# Format: "flag_name:file_path"
+declare -A file_map=(
+#  ["mock"]="mock.lua"
+  ["frequency"]="frequency.lua"
+  ["vminmax_simple"]="vminmax_simple.lua"
+  ["brakebias"]="brakebias.lua"
+)
+
+# Check if any arguments are provided
+if [ $# -eq 0 ]; then
+  echo "Usage: $0 [flags]"
+  echo "Available flags:"
+  for flag in "${!file_map[@]}"; do
+    echo "  $flag : ${file_map[$flag]}"
+  done
+  echo "  all : Concatenate all defined files"
+  exit 1
+fi
+
+# Variable to store files to be concatenated
+files_to_concat=(main.lua)
+
+# Process arguments
+for arg in "$@"; do
+  case $arg in
+    all)
+      # Add all files if --all is present
+      for file_path in "${file_map[@]}"; do
+        if [ -f "$file_path" ]; then
+          files_to_concat+=("$file_path")
+        else
+          echo "Warning: File '$file_path' for 'all' not found." >&2
+        fi
+      done
+      break # No need to process other flags if --all is specified
+      ;;
+    *)
+      flag_name="${arg}"
+      if [[ -v file_map["$flag_name"] ]]; then
+        file_path="${file_map[$flag_name]}"
+        if [ -f "$file_path" ]; then
+          files_to_concat+=("$file_path")
+        else
+          echo "Warning: File '$file_path' for flag '$flag_name' not found." >&2
+        fi
+      else
+        echo "Warning: Unknown flag '$arg'." >&2
+        exit 1
+      fi
+      ;;
+  esac
+done
+
+if [ ${#files_to_concat[@]} -gt 0 ]; then
+  # Concatenate the selected files to stdout
+  # Using printf and xargs to handle filenames with spaces or special characters correctly
+  printf "%s\0" "${files_to_concat[@]}" | xargs -0 cat
+fi
+
+exit 0
