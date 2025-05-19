@@ -9,8 +9,8 @@ local FREQUENCY = 10
 local MIN_DELTA_MPH = 10
 
 -- name, Hz, precision, min, max, units
-local minId = addChannel('VMin', 2, 0, 0, 200, 'mph')
-local maxId = addChannel('VMax', 2, 0, 0, 200, 'mph')
+local minId = addChannel('VMin', 5, 0, 0, 200, 'mph')
+local maxId = addChannel('VMax', 5, 0, 0, 200, 'mph')
 
 -- recorded values
 local vs = {}
