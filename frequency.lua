@@ -12,8 +12,7 @@ function should_run(hz)
 end
 
 function tick_frequency()
-  if tick >= math.maxinteger then tick = 0
-  else tick = tick + 1 end
+  tick + 1
 end
 
 
