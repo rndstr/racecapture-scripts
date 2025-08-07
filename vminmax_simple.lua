@@ -49,7 +49,7 @@ function tick_vminmax_simple()
     table.insert(vs, speed)
     if #vs > WINDOW_SIZE_SEC*FREQUENCY then table.remove(vs, 1) end
     if #vs == WINDOW_SIZE_SEC*FREQUENCY then
-      local id, value = vminmax_simple()
+      local id, value = __vminmax_signal()
       if id ~= 0 then
         setChannel(id, value)
       end
