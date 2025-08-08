@@ -1,6 +1,6 @@
 --------------------------------------------
 -- brakebias: Adds BrakeBias signal.
-bbid = addChannel('BrakeBias', 5, 1, 0, 100, '%')
+local bbid = addChannel('BrakeBias', 5, 1, 0, 100, '%')
 
 function tick_brakebias()
   local f = getChannel('BrakeF')
