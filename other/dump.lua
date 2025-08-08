@@ -28,7 +28,6 @@ function dumpSignals()
       end
     end
   until id == nil
-    println('----- END -----')
 end
 
 function dumpChannels()
@@ -42,8 +41,11 @@ function dumpChannels()
 end
  
 function onTick()
+  println('----- SIGNALS -----')
   dumpSignals()
+  println('----- CHANNELS -----')
   dumpChannels()
+  println('----- END -----')
 end
 
 setTickRate(30)
