@@ -44,7 +44,7 @@ end
 
 function tick_vminmax_simple()
   local speed = getChannel('Speed')
-  if should_run(FREQUENCY) then
+  if speed ~= nil and should_run(FREQUENCY) then
     -- append, resize, update.
     table.insert(vs, speed)
     if #vs > WINDOW_SIZE_SEC*FREQUENCY then table.remove(vs, 1) end
