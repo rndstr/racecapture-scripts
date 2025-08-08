@@ -3,11 +3,15 @@
 --
 -- Uncomment calls in onTick() to run scripts.
 
-DEBUG = true
+LOG_LEVEL = 'info'
 TICKS = 50
 
-function dbg(str)
-  if DEBUG then print(str) end
+function info(str)
+  if LOG_LEVEL == 'info' then print(str) end
+end
+
+function verbose(str)
+  if LOG_LEVEL == 'info' or LOG_LEVEL == 'verbose' then print(str) end
 end
 
 setTickRate(TICKS)
