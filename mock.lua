@@ -6,7 +6,9 @@ mocks = {
   {id=addChannel("CoolantTemp", 10, 0), from=100, to=280, step=1},
   {id=addChannel("OilTemp", 10, 0), from=100, to=280, step=-1},
   {id=addChannel("TPS", 10, 0), from=0, to=100, step=1},
-  {id=addChannel("Brake", 10, 0), from=0, to=100, step=2},
+  {id=addChannel("BrakeF", 10, 0), from=0, to=75, step=2},
+  {id=addChannel("BrakeR", 10, 0), from=0, to=75, step=2},
+  {id=addChannel("Speed", 10, 0), from=30, to=120, step=0.2},
 }
 
 function tick_mock()
