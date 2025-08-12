@@ -7,11 +7,11 @@ LOG_LEVEL = 'info'
 TICKS = 50
 
 function info(str)
-  if LOG_LEVEL == 'info' then print(str) end
+  if LOG_LEVEL == 'info' or LOG_LEVEL == 'verbose' then print(str) end
 end
 
 function verbose(str)
-  if LOG_LEVEL == 'info' or LOG_LEVEL == 'verbose' then print(str) end
+  if LOG_LEVEL == 'verbose' then print(str) end
 end
 
 setTickRate(TICKS)
