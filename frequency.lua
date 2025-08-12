@@ -12,7 +12,7 @@ function should_run(hz)
 end
 
 function tick_frequency()
-  tick + 1
+  tick = tick + 1
 end
 
 
