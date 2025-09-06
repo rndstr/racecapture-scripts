@@ -8,6 +8,7 @@ declare -A file_map=(
   ["frequency"]="frequency.lua"
   ["vminmax_simple"]="vminmax_simple.lua"
   ["brakebias"]="brakebias.lua"
+  ["besttimetoday"]="besttimetoday.lua"
 )
 
 # Check if any arguments are provided
