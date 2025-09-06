@@ -1,5 +1,13 @@
 --------------------------------------------
 -- vminmax_simple: simple window based VMin and VMax signal.
+--
+-- OUT
+-- channel: VMin
+-- channel: VMax
+--
+-- IN
+-- Speed
+--
 
 -- window size in seconds to keep track of first and last value.
 local WINDOW_SIZE_SEC = 5
