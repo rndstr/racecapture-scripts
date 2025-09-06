@@ -22,8 +22,6 @@ local maxId = addChannel('VMax', 5, 0, 0, 200, 'mph')
 
 -- recorded values
 local vs = {}
--- we record a value every TICKS/FREQUENCY counts.
-local tick_count = 0
 
 -- local min/max calculation.
 -- Returns signalId and value to update it to.
