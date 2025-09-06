@@ -3,6 +3,7 @@ local TODAY = string.format('%d%d%d', Y, M, D)
 
 local bestTimeToday = loadVar('best_time_today')
 local deltaId = addChannel('LapDeltaToday', 10, 3, -100, 100, 's')
+local bestId = addChannel('BestTimeToday', 1, 3, 0, 5, 's')
 
 
 -- reset?
@@ -17,6 +18,7 @@ function __update_besttime(bestTime)
     info('updating today\'s best time to: '..bestTime)
     saveVar('best_time_today', bestTime)
     bestTimeToday = bestTime
+    setChannel(bestId)
 end
 
 
