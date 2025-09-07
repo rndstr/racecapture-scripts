@@ -28,7 +28,7 @@ local vs = {}
 function __vminmax_signal()
   verbose('\n'..table.concat(vs, ','))
   first, mid, last = vs[1], vs[math.ceil(#vs/2)], vs[#vs]
-  info('\nfirst='..first..', mid='..mid..', last='..last..' @'..tick)
+  verbose('\nfirst='..first..', mid='..mid..', last='..last..' @'..tick)
   -- too flat?
   if math.abs(mid-first) < MIN_DELTA_MPH or math.abs(mid-last) < MIN_DELTA_MPH then
     verbose('\n  too similar.')
