@@ -20,6 +20,7 @@ function onTick()
   tick_frequency()
   -- tick_vminmax_simple()
   -- tick_besttimetoday()
+  -- tick_gpsqual()
   -- tick_brakebias()
   -- tick_mock()
 end
