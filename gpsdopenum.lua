@@ -23,7 +23,7 @@ local gpsDopEnumId = addChannel('GpsDopEnum', 1, 0, 0, 5)
 function tick_gpsdopenum()
   if not should_run(1) then return end
   local dop = getChannel('GPSDOP')
-  local enum = 21
+  local enum = 5
   
   if dop < 1 then enum = 0 -- ideal
   elseif dop >= 1 and dop <= 2 then enum = 1 -- excellent
