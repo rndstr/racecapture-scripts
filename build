@@ -9,7 +9,7 @@ declare -A file_map=(
   ["vminmax_simple"]="vminmax_simple.lua"
   ["brakebias"]="brakebias.lua"
   ["besttimetoday"]="besttimetoday.lua"
-  ["gpsqual"]="gpsqual.lua"
+  ["gpsdopenum"]="gpsdopenum.lua"
 )
 
 # Check if any arguments are provided
