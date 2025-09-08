@@ -32,10 +32,12 @@ end
 function tick_besttimetoday()
     -- track best time today
     local bestTimeSession = getBestTime()
-    if bestTimeToday == nil or bestTimeSession < bestTimeToday then
+    if bestTimeToday == nil or (bestTimeSession ~= nil and bestTimeSession < bestTimeToday) then
         __besttime_update(bestTimeSession)
     end
     -- calculate delta
-    setChannel(deltaId, 60*(getPredTime()-bestTimeToday))
+    if bestTimeToday ~= nil then
+        setChannel(deltaId, 60*(getPredTime()-bestTimeToday))
+    end
 end
 
