@@ -24,7 +24,7 @@ end
 
 -- reset?
 if loadVar('best_time_day') ~= TODAY then
-    info('\nwelcome to a new day')
+    info('welcome to a new day.')
     saveVar('best_time_day', TODAY)
     __besttime_update(nil)
 end
