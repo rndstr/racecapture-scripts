@@ -26,25 +26,25 @@ local vs = {}
 -- local min/max calculation.
 -- Returns signalId and value to update it to.
 function __vminmax_signal()
-  verbose('\n'..table.concat(vs, ','))
+  verbose(table.concat(vs, ','))
   first, mid, last = vs[1], vs[math.ceil(#vs/2)], vs[#vs]
-  verbose('\nfirst='..first..', mid='..mid..', last='..last..' @'..tick)
+  verbose('first='..first..', mid='..mid..', last='..last..' @'..tick)
   -- too flat?
   if math.abs(mid-first) < MIN_DELTA_MPH or math.abs(mid-last) < MIN_DELTA_MPH then
-    verbose('\n  too similar.')
+    verbose('  too similar.')
     return 0, nil
   end
   -- maxima?
   if first < mid and last < mid then
-    info('\n  new max='..mid)
+    info('  new max='..mid)
     return maxId, mid
   end
   -- minima?
   if first > mid and last > mid then
-    info('\n  new min='..mid)
+    info('  new min='..mid)
     return minId, mid
   end
-  verbose('\n  no hill.')
+  verbose('  no hill.')
   return 0, nil
 end
 
@@ -62,4 +62,3 @@ function tick_vminmax_simple()
     end
   end
 end
-
