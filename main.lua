@@ -18,9 +18,10 @@ end
 setTickRate(TICKS)
 function onTick()
   tick_frequency()
-  -- tick_vminmax_simple()
-  -- tick_besttimetoday()
-  -- tick_gpsdopenum()
+  tick_vminmax_simple()
+  tick_besttimetoday()
+  tick_gpsdopenum()
+  tick_iatdelta()
   -- tick_brakebias()
   -- tick_mock()
 end

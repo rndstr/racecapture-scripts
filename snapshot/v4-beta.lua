@@ -8,11 +8,11 @@ LOG_LEVEL = 'info'
 TICKS = 50
 
 function info(str)
-  if LOG_LEVEL == 'info' or LOG_LEVEL == 'verbose' then print(str) end
+  if LOG_LEVEL == 'info' or LOG_LEVEL == 'verbose' then print('*** '..str) end
 end
 
 function verbose(str)
-  if LOG_LEVEL == 'verbose' then print(str) end
+  if LOG_LEVEL == 'verbose' then print('+++ '..str) end
 end
 
 setTickRate(TICKS)
@@ -20,7 +20,33 @@ function onTick()
   tick_frequency()
   tick_vminmax_simple()
   tick_besttimetoday()
+  tick_gpsdopenum()
+  tick_iatdelta()
+  -- tick_brakebias()
+  -- tick_mock()
 end
+--------------------------------------------
+-- iatdelta: Provide delta to ambient air temp.
+--
+-- Allows observing the temp delta between ambient
+-- and intake.
+--
+-- OUT
+-- channel: IATDelta
+--
+-- IN
+-- channel: AAT
+--
+
+local iatDeltaId = addChannel('IATDelta', 1, 0, -50, 50, 'F')
+
+function tick_iatdelta()
+  if not should_run(1) then return end
+  local aat = getChannel('AAT')
+  local iat = getChannel('IAT')
+  setChannel(iatDeltaId, iat-aat)
+end
+
 --------------------------------------------
 -- frequency: A script to help run actions less frequently than
 -- the global TICK frequency.
@@ -42,6 +68,7 @@ end
 --------------------------------------------
 -- besttimetoday: Keeps track of the best lap time today
 --
+-- OUT
 -- channel: BestTimeT "Best lap time today"
 -- channel: LapDeltaT "Lap time delta vs best time today"
 -- var: best_time_day
@@ -82,8 +109,12 @@ end
 --------------------------------------------
 -- vminmax_simple: simple window based VMin and VMax signal.
 --
+-- OUT
 -- channel: VMin
 -- channel: VMax
+--
+-- IN
+-- Speed
 --
 
 -- window size in seconds to keep track of first and last value.
@@ -99,15 +130,13 @@ local maxId = addChannel('VMax', 5, 0, 0, 200, 'mph')
 
 -- recorded values
 local vs = {}
--- we record a value every TICKS/FREQUENCY counts.
-local tick_count = 0
 
 -- local min/max calculation.
 -- Returns signalId and value to update it to.
 function __vminmax_signal()
   verbose('\n'..table.concat(vs, ','))
   first, mid, last = vs[1], vs[math.ceil(#vs/2)], vs[#vs]
-  info('\nfirst='..first..', mid='..mid..', last='..last..' @'..tick)
+  verbose('\nfirst='..first..', mid='..mid..', last='..last..' @'..tick)
   -- too flat?
   if math.abs(mid-first) < MIN_DELTA_MPH or math.abs(mid-last) < MIN_DELTA_MPH then
     verbose('\n  too similar.')
@@ -142,3 +171,39 @@ function tick_vminmax_simple()
   end
 end
 
+--------------------------------------------
+-- gpsdopenum: Transform quality range into enum.
+-- Dilution of precision.
+-- See https://en.wikipedia.org/wiki/Dilution_of_precision_(navigation)
+--
+-- OUT
+-- channel: GpsDopEnum
+--
+-- IN
+-- channel: GPSDOP
+--
+-- GPSDOP (meaning) [GpsDopEnum]
+-- <1 (Ideal) [0]
+-- 1-2 (Excellent) [1]
+-- 2-5 (Good) [2]
+-- 5-10 (Moderate) [3]
+-- 10-20 (Fair) [4]
+-- >20 (Poor) [5]
+--
+
+local gpsDopEnumId = addChannel('GpsDopEnum', 1, 0, 0, 5)
+
+function tick_gpsdopenum()
+  if not should_run(1) then return end
+  local dop = getChannel('GPSDOP')
+  local enum = 5
+
+  if dop < 1 then enum = 0 -- ideal
+  elseif dop >= 1 and dop <= 2 then enum = 1 -- excellent
+  elseif dop >= 3 and dop <= 5 then enum = 2 --good
+  elseif dop >= 6 and dop <= 10 then enum = 3 -- moderate
+  elseif dop >= 11 and dop <= 20 then enum = 4 -- fair
+  elseif dop >= 21 then enum = 5 -- poor
+  end
+  setChannel(gpsDopEnumId, enum)
+end

@@ -24,7 +24,7 @@ function tick_gpsdopenum()
   if not should_run(1) then return end
   local dop = getChannel('GPSDOP')
   local enum = 5
-  
+
   if dop < 1 then enum = 0 -- ideal
   elseif dop >= 1 and dop <= 2 then enum = 1 -- excellent
   elseif dop >= 3 and dop <= 5 then enum = 2 --good

@@ -4,12 +4,13 @@
 # Add your file paths and desired flags here.
 # Format: "flag_name:file_path"
 declare -A file_map=(
-#  ["mock"]="mock.lua"
   ["frequency"]="frequency.lua"
   ["vminmax_simple"]="vminmax_simple.lua"
-  ["brakebias"]="brakebias.lua"
   ["besttimetoday"]="besttimetoday.lua"
   ["gpsdopenum"]="gpsdopenum.lua"
+  ["iatdelta"]="iatdelta.lua"
+#  ["brakebias"]="brakebias.lua"
+#  ["mock"]="mock.lua"
 )
 
 # Check if any arguments are provided
