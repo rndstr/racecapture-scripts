@@ -5,7 +5,7 @@
 
 -- 'info', 'verbose', or nil
 LOG_LEVEL = 'info'
-TICKS = 50
+TICKS = 10
 
 function info(str)
   if LOG_LEVEL == 'info' then print('*** '..str) end
@@ -98,7 +98,7 @@ end
 --
 
 -- window size in seconds to keep track of first and last value.
-local WINDOW_SIZE_SEC = 1
+local WINDOW_SIZE_SEC = 5
 -- how many per seconds to record
 local FREQUENCY = 10
 -- minimum difference between edges and mid value to be considered a local value.
