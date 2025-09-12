@@ -1,7 +1,7 @@
 LOG_LEVEL = 'info'
 TICKS = 10
 function info(str)
-  if LOG_LEVEL == 'info' or LOG_LEVEL == 'verbose' then print('\n*** '..str) end
+  if (LOG_LEVEL == 'info') or (LOG_LEVEL == 'verbose') then print('\n*** '..str) end
 end
 function verbose(str)
   if LOG_LEVEL == 'verbose' then print('\n+++ '..str) end
