@@ -5,7 +5,7 @@
 
 -- 'info', 'verbose', or nil
 LOG_LEVEL = 'info'
-TICKS = 50
+TICKS = 10
 
 function info(str)
   if LOG_LEVEL == 'info' or LOG_LEVEL == 'verbose' then print('\n*** '..str) end
