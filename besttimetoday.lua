@@ -26,15 +26,15 @@ local bestMinId = addChannel('BestMinT', 1, 0, 0, 5, 'm')
 local bestSecId = addChannel('BestSecT', 1, 3, 0, 60, 's')
 
 function __besttime_update(bestTime)
-    if bestTime ~= nil then info('\nbest time today update: '..bestTime) end
     saveVar('best_time_today', bestTime)
     setChannel(bestTimeId, bestTime)
-    local bestMin = math.tointeger(bestTime)
-    local bestSec = (bestTime - bestMin)*60
-    setChannel(bestMinId, bestMin)
-    setChannel(bestSecId, bestSec)
-    verbose('time='..bestTime..', min='..bestMin..', sec='..bestSec)
-
+    if bestTime ~= nil then
+        local bestMin = bestTime - (bestTime % 1)
+        local bestSec = (bestTime - bestMin)*60
+        setChannel(bestMinId, bestMin)
+        setChannel(bestSecId, bestSec)
+        verbose('time='..bestTime..', min='..bestMin..', sec='..bestSec)
+    end
     bestTimeToday = bestTime
 end
 
