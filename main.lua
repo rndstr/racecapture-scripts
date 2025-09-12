@@ -21,7 +21,10 @@ function onTick()
   tick_vminmax_simple()
   tick_besttimetoday()
   tick_gpsdopenum()
-  tick_iatdelta()
+  --tick_iatdelta()
   -- tick_brakebias()
   -- tick_mock()
+
+  -- once every 10s.
+  if should_run(0.1) then collectgarbage('collect') end
 end

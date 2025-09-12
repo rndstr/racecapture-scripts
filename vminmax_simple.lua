@@ -27,7 +27,7 @@ local vs = {}
 -- Returns signalId and value to update it to.
 function __vminmax_signal()
   verbose(table.concat(vs, ','))
-  first, mid, last = vs[1], vs[math.ceil(#vs/2)], vs[#vs]
+  local first, mid, last = vs[1], vs[math.ceil(#vs/2)], vs[#vs]
   verbose('first='..first..', mid='..mid..', last='..last..' @'..tick)
   -- too flat?
   if math.abs(mid-first) < MIN_DELTA_MPH or math.abs(mid-last) < MIN_DELTA_MPH then
