@@ -60,8 +60,7 @@ done
 
 if [ ${#files_to_concat[@]} -gt 0 ]; then
   # Concatenate the selected files to stdout
-  # Using printf and xargs to handle filenames with spaces or special characters correctly
-  printf "%s\0" "${files_to_concat[@]}" | xargs -0 cat
+  printf "%s\0" "${files_to_concat[@]}" | xargs -0 cat | sed -e 's/\s*--.*//' -e '/^\s*$/d'
 fi
 
 exit 0
