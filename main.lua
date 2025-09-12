@@ -21,7 +21,7 @@ function onTick()
   tick_vminmax_simple()
   tick_besttimetoday()
   tick_gpsdopenum()
-  --tick_iatdelta()
+  -- tick_iatdelta()
   -- tick_brakebias()
   -- tick_mock()
 
